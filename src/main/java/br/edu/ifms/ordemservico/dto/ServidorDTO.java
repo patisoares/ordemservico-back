@@ -2,15 +2,22 @@ package br.edu.ifms.ordemservico.dto;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
 import br.edu.ifms.ordemservico.entities.Servidor;
 
 public class ServidorDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
+	@NotBlank(message = "O campo nome é obrigatório")
 	private String nome;
+	@NotBlank(message = "O campo telefone é obrigatório")
 	private String telefone;
+	@Email
 	private String email;
+	@NotBlank(message = "O campo senha é obrigatório")
 	private String senha;
 	
 	public ServidorDTO() { }

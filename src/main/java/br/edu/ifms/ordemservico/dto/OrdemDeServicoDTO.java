@@ -3,6 +3,10 @@ package br.edu.ifms.ordemservico.dto;
 import java.io.Serializable;
 import java.time.Instant;
 
+import javax.validation.constraints.Future;
+import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.NotBlank;
+
 import br.edu.ifms.ordemservico.entities.OrdemDeServico;
 import br.edu.ifms.ordemservico.entities.Servidor;
 import br.edu.ifms.ordemservico.entities.enums.Prioridade;
@@ -12,14 +16,21 @@ public class OrdemDeServicoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
+	@NotBlank(message = "O campo é obrigatório")
 	private String equipamento;
+	@NotBlank(message = "O campo é obrigatório")
 	private String patrimonio;
+	@NotBlank(message = "O campo é obrigatório")
 	private String setor;
+	@NotBlank(message = "O campo é obrigatório")
 	private String descricaoProblema;
+	@FutureOrPresent(message = "A data não pode ser no passado")
 	private Instant dataCadastro;
 	private Status status;
 	private Prioridade prioridade;
+	@NotBlank(message = "O campo é obrigatório")
 	private String descricaoSolucao;
+	@NotBlank(message = "O campo é obrigatório")
 	private Servidor servidor;
 	
 	public OrdemDeServicoDTO() { }
