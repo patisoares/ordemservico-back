@@ -1,4 +1,4 @@
-package ordemservico.config;
+package br.edu.ifms.ordemservico.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
