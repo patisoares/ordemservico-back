@@ -1,7 +1,7 @@
 package br.edu.ifms.ordemservico.dto;
 
 import java.io.Serializable;
-import java.time.Instant;
+import java.sql.Date;
 
 import javax.validation.constraints.FutureOrPresent;
 import javax.validation.constraints.NotBlank;
@@ -24,18 +24,16 @@ public class OrdemDeServicoDTO implements Serializable {
 	@NotBlank(message = "O campo é obrigatório")
 	private String descricaoProblema;
 	@FutureOrPresent(message = "A data não pode ser no passado")
-	private Instant dataCadastro;
+	private Date dataCadastro;
 	private Status status;
 	private Prioridade prioridade;
-	@NotBlank(message = "O campo é obrigatório")
 	private String descricaoSolucao;
-	@NotBlank(message = "O campo é obrigatório")
 	private Servidor servidor;
 	
 	public OrdemDeServicoDTO() { }
-
+	
 	public OrdemDeServicoDTO(Long id, String equipamento, String patrimonio, String setor, String descricaoProblema,
-			Instant dataCadastro, Status status, Prioridade prioridade, String descricaoSolucao, Servidor servidor) {
+			Date dataCadastro, Status status, Prioridade prioridade, String descricaoSolucao, Servidor servidor) {
 		super();
 		this.id = id;
 		this.equipamento = equipamento;
@@ -48,7 +46,7 @@ public class OrdemDeServicoDTO implements Serializable {
 		this.descricaoSolucao = descricaoSolucao;
 		this.servidor = servidor;
 	}
-	
+
 	public OrdemDeServicoDTO(OrdemDeServico ordem) {
 		super();
 		this.id = ordem.getId();
@@ -103,11 +101,11 @@ public class OrdemDeServicoDTO implements Serializable {
 		this.descricaoProblema = descricaoProblema;
 	}
 
-	public Instant getDataCadastro() {
+	public Date getDataCadastro() {
 		return dataCadastro;
 	}
 
-	public void setDataCadastro(Instant dataCadastro) {
+	public void setDataCadastro(Date dataCadastro) {
 		this.dataCadastro = dataCadastro;
 	}
 
@@ -142,6 +140,6 @@ public class OrdemDeServicoDTO implements Serializable {
 	public void setServidor(Servidor servidor) {
 		this.servidor = servidor;
 	}
-	
-	
+
+		
 }

@@ -1,7 +1,7 @@
 package br.edu.ifms.ordemservico.entities;
 
 import java.io.Serializable;
-import java.time.Instant;
+import java.sql.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,8 +30,7 @@ public class OrdemDeServico implements Serializable {
 	private String setor;
 	@Column(columnDefinition = "TEXT")
 	private String descricaoProblema;
-	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-	private Instant dataCadastro;
+	private Date dataCadastro;
 	@Enumerated(value = EnumType.STRING)
 	private Status status;
 	@Enumerated(value = EnumType.STRING)
@@ -45,9 +44,8 @@ public class OrdemDeServico implements Serializable {
 	
 	public OrdemDeServico() { }
 
-
 	public OrdemDeServico(Long id, String equipamento, String patrimonio, String setor, String descricaoProblema,
-			Instant dataCadastro, Status status, Prioridade prioridade, String descricaoSolucao, Servidor servidor) {
+			Date dataCadastro, Status status, Prioridade prioridade, String descricaoSolucao, Servidor servidor) {
 		super();
 		this.id = id;
 		this.equipamento = equipamento;
@@ -66,101 +64,81 @@ public class OrdemDeServico implements Serializable {
 		return id;
 	}
 
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 
 	public String getEquipamento() {
 		return equipamento;
 	}
 
-
 	public void setEquipamento(String equipamento) {
 		this.equipamento = equipamento;
 	}
-
 
 	public String getPatrimonio() {
 		return patrimonio;
 	}
 
-
 	public void setPatrimonio(String patrimonio) {
 		this.patrimonio = patrimonio;
 	}
-
 
 	public String getSetor() {
 		return setor;
 	}
 
-
 	public void setSetor(String setor) {
 		this.setor = setor;
 	}
-
 
 	public String getDescricaoProblema() {
 		return descricaoProblema;
 	}
 
-
 	public void setDescricaoProblema(String descricaoProblema) {
 		this.descricaoProblema = descricaoProblema;
 	}
 
-
-	public Instant getDataCadastro() {
+	public Date getDataCadastro() {
 		return dataCadastro;
 	}
 
-
-	public void setDataCadastro(Instant dataCadastro) {
+	public void setDataCadastro(Date dataCadastro) {
 		this.dataCadastro = dataCadastro;
 	}
-
 
 	public Status getStatus() {
 		return status;
 	}
 
-
 	public void setStatus(Status status) {
 		this.status = status;
 	}
-
 
 	public Prioridade getPrioridade() {
 		return prioridade;
 	}
 
-
 	public void setPrioridade(Prioridade prioridade) {
 		this.prioridade = prioridade;
 	}
-
 
 	public String getDescricaoSolucao() {
 		return descricaoSolucao;
 	}
 
-
 	public void setDescricaoSolucao(String descricaoSolucao) {
 		this.descricaoSolucao = descricaoSolucao;
 	}
-
 
 	public Servidor getServidor() {
 		return servidor;
 	}
 
-
 	public void setServidor(Servidor servidor) {
 		this.servidor = servidor;
 	}
-
 
 	@Override
 	public int hashCode() {
