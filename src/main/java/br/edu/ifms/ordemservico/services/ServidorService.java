@@ -16,6 +16,8 @@ import br.edu.ifms.ordemservico.dto.ServidorDTO;
 import br.edu.ifms.ordemservico.entities.Servidor;
 import br.edu.ifms.ordemservico.repositories.ServidorRepository;
 import br.edu.ifms.ordemservico.services.exceptions.DataBaseException;
+import br.edu.ifms.ordemservico.services.exceptions.ErroAutenticacaoException;
+import br.edu.ifms.ordemservico.services.exceptions.RegraNegocioException;
 import br.edu.ifms.ordemservico.services.exceptions.ResourceNotFoundException;
 
 @Service
@@ -24,7 +26,21 @@ public class ServidorService {
 	@Autowired
 	private ServidorRepository repository;
 	
-	@Transactional(readOnly = true)
+	public Servidor autenticar(String email, String senha) {
+		Optional<Servidor> servidor = repository.findByEmail(email);
+		
+			if(!servidor.isPresent()) {
+				throw new ErroAutenticacaoException("O email do servidor não foi localizado.");
+			}
+			
+			if(!servidor.get().getSenha().equals(senha)) {
+				throw new ErroAutenticacaoException("A senha do servidor não foi localizada.");
+			}
+			return servidor.get();
+		
+	}
+	
+	@Transactional(readOnly = true) 	
 	public List<ServidorDTO> findAll(){
 		List<Servidor> list = repository.findAll();
 		return list.stream().map(servidor -> new ServidorDTO(servidor))
@@ -42,6 +58,7 @@ public class ServidorService {
 	public ServidorDTO insert(ServidorDTO dto) {
 		Servidor servidor = new Servidor();
 		copyDtoToEntity(dto, servidor);
+		validarEmail(servidor.getEmail());
 		servidor = repository.save(servidor);
 		return new ServidorDTO(servidor);		
 	}
@@ -51,6 +68,7 @@ public class ServidorService {
 		try {
 			Servidor servidor = repository.getById(id);
 			copyDtoToEntity(dto, servidor);
+			validarEmail(servidor.getEmail());
 			servidor = repository.save(servidor);
 			return new ServidorDTO(servidor);
 		} catch (EntityNotFoundException e) {
@@ -74,4 +92,11 @@ public class ServidorService {
 		servidor.setTelefone(dto.getTelefone());
 		servidor.setSenha(dto.getSenha());
 	}	
+	
+	public void validarEmail(String email) {
+		boolean existe = repository.existsByEmail(email);
+		if(existe) {
+			throw new RegraNegocioException("Já existe um servidor cadastrado com esse email.");
+		}
+	}
 }
