@@ -51,8 +51,17 @@ public class ServidorResource {
 		}
 	}
 	
+	//@PostMapping("/autenticar")
+	//public ResponseEntity <ServidorDTO> autenticar (@valid @RequestBody ServidorDTO dto) {
+	//     dto = service.autenticar(dto);
+	//     return ResponseEntity.ok().body(dto);	
+	//}
+
+	
+	
+	
 	@PostMapping
-	public ResponseEntity<ServidorDTO> inset(@Valid @RequestBody ServidorDTO dto){
+	public ResponseEntity<ServidorDTO> insert(@Valid @RequestBody ServidorDTO dto){
 		dto = service.insert(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
 											 .path("/{id}")

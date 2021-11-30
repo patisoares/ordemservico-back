@@ -23,7 +23,6 @@ public class OrdemDeServicoDTO implements Serializable {
 	private String setor;
 	@NotBlank(message = "O campo é obrigatório")
 	private String descricaoProblema;
-	@FutureOrPresent(message = "A data não pode ser no passado")
 	private Date dataCadastro;
 	private Status status;
 	private Prioridade prioridade;
